@@ -10,29 +10,12 @@ import (
 )
 
 func main() {
-//     port := os.Getenv("PORT")
-//     if port == "" {
-//         port = "8080"
-//     }
+    
+    http.Handle("/foo", fooHandler)
 
-//     router := gin.Default()
-//     router.GET("/", func(c *gin.Context) {
-//         c.String(http.StatusOK, "Hello, Dude!")
-//     })
+    http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+    })
 
-//     fmt.Printf("Server listening on port %s...\n", port)
-//     err := router.Run(":" + port)
-//     if err != nil {
-//         panic(err)
-//     }
-    
-    http.HandleFunction("/", func(w http.ResponseWriter, r * http.Request){
-        fmt.Fprintf(w, "Go server is working, %q ", html.EsceapeString(r.URL.Path))
-    })
-    
-    http.HandleFunc("/wallet", func(w http.ResponseWriter, r* http.Request){
-        fmt.Fprintf(w, "Wallet server is workin")   
-    })
-    
-    log.fatal(http.ListenAndServe(":8081", nil))
+    log.Fatal(http.ListenAndServe(":8080", nil))
 }
