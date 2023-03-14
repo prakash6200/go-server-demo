@@ -11,9 +11,7 @@ import (
 
 func main() {
     
-    http.Handle("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Go server is working, %q", html.EscapeString(r.URL.Path))
-    })
+   
 
     http.HandleFunc("/wallet", func(w http.ResponseWriter, r *http.Request) {
         fmt.Fprintf(w, "wallet server is working, %q", html.EscapeString(r.URL.Path))
