@@ -1,4 +1,8 @@
-FROM golang:1.14
+FROM golang:1.14.0-apline3.9
+
+RUN mkdir /app
+
+ADD ./app
 
 WORKDIR /app
 
@@ -6,12 +10,6 @@ COPY go.mod go.sum ./
 
 RUN go mod download
 
-COPY . .
+RUN go build -o main
 
-RUN go build
-
-EXPOSE 8080
-
-ENV GIN_MODE=release
-
-CMD ./golang-demo
+CMD ["/app/main"]
