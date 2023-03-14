@@ -10,4 +10,4 @@ RUN go mod download
 
 RUN go build 
 
-CMD ["/app/main"]
+CMD ["/main"]
