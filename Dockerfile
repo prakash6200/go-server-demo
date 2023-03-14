@@ -2,8 +2,6 @@ FROM golang:1.14.0-apline3.9
 
 RUN mkdir /app
 
-ADD ./app
-
 WORKDIR /app
 
 COPY go.mod go.sum ./
