@@ -1,4 +1,4 @@
-FROM golang:1.14.0-apline3.9
+FROM golang:1.14
 
 RUN mkdir /app
 
