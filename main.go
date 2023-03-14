@@ -5,24 +5,34 @@ package main
 import (
     "fmt"
     "net/http"
-    "os"
-    "github.com/gin-gonic/gin"
+    "log"
+    "html"
 )
 
 func main() {
-    port := os.Getenv("PORT")
-    if port == "" {
-        port = "8080"
-    }
+//     port := os.Getenv("PORT")
+//     if port == "" {
+//         port = "8080"
+//     }
 
-    router := gin.Default()
-    router.GET("/", func(c *gin.Context) {
-        c.String(http.StatusOK, "Hello, Dude!")
+//     router := gin.Default()
+//     router.GET("/", func(c *gin.Context) {
+//         c.String(http.StatusOK, "Hello, Dude!")
+//     })
+
+//     fmt.Printf("Server listening on port %s...\n", port)
+//     err := router.Run(":" + port)
+//     if err != nil {
+//         panic(err)
+//     }
+    
+    http.HandleFunction("/", func(w http.ResponseWriter, r * http.Request){
+        fmt.Fprintf(w, "Go server is working, %q ", html.EsceapeString(r.URL.Path))
     })
-
-    fmt.Printf("Server listening on port %s...\n", port)
-    err := router.Run(":" + port)
-    if err != nil {
-        panic(err)
-    }
+    
+    http.HandleFunc("/wallet", func(w http.ResponseWriter, r* http.Request){
+        fmt.Fprintf(w, "Wallet server is workin")   
+    })
+    
+    log.fatal(http.ListenAndServe(":8081", nil))
 }
