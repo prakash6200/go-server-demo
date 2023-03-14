@@ -11,10 +11,12 @@ import (
 
 func main() {
     
-    http.Handle("/foo", fooHandler)
+    http.Handle("/", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintf(w, "Go server is working, %q", html.EscapeString(r.URL.Path))
+    })
 
-    http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+    http.HandleFunc("/wallet", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintf(w, "wallet server is working, %q", html.EscapeString(r.URL.Path))
     })
 
     log.Fatal(http.ListenAndServe(":8080", nil))
